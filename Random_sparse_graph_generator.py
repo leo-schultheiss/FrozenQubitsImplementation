@@ -5,6 +5,7 @@
 """Generate a randomly connected graph with N nodes and E edges."""
 import random
 import argparse
+import networkx as nx
 from pprint import pprint
 
 
@@ -244,6 +245,36 @@ def wilsons_algo(nodes, num_edges, loops=False, multigraph=False, digraph=False)
     raise NotImplementedError()
 
 
+def generate_randomwalk_graph(num_nodes, num_edges):
+    nodes = list(range(num_nodes))
+    graph = random_walk(nodes, num_edges, loops=False, multigraph=False, digraph=False)
+    pprint(graph)
+    return graph
+
+
+def convert_thisGraph_to_thatGraph(graph: Graph):
+    new_graph = nx.Graph()
+    edges = graph.edges
+    nodes = graph.nodes
+    new_graph.add_edges_from(edges)
+    new_graph.add_nodes_from(nodes)
+    return new_graph
+
+
+def generate_J_from_graph(graph: nx.Graph):
+    J = dict()
+    for edge in graph.edges:
+        weight = random.choice([-1., 1.])
+        J[edge] = weight
+    return J
+
+def generate_h_from_graph(graph: nx.Graph):
+    h = dict()
+    for node in graph.nodes:
+        h[node] = 0.
+    return h
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('nodes',
@@ -297,7 +328,7 @@ if __name__ == '__main__':
 
     # Approach
     if args.approach:
-        print ('Setting approach:', args.approach)
+        print('Setting approach:', args.approach)
         approach = locals()[args.approach]
     else:
         approach = random_walk
