@@ -252,29 +252,6 @@ def generate_randomwalk_graph(num_nodes, num_edges):
     return graph
 
 
-def convert_thisGraph_to_thatGraph(graph: Graph):
-    new_graph = nx.Graph()
-    edges = graph.edges
-    nodes = graph.nodes
-    new_graph.add_edges_from(edges)
-    new_graph.add_nodes_from(nodes)
-    return new_graph
-
-
-def generate_J_from_graph(graph: nx.Graph):
-    J = dict()
-    for edge in graph.edges:
-        weight = random.choice([-1., 1.])
-        J[edge] = weight
-    return J
-
-def generate_h_from_graph(graph: nx.Graph):
-    h = dict()
-    for node in graph.nodes:
-        h[node] = 0.
-    return h
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('nodes',
