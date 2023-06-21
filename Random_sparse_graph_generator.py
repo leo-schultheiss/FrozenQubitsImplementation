@@ -248,7 +248,6 @@ def wilsons_algo(nodes, num_edges, loops=False, multigraph=False, digraph=False)
 def generate_randomwalk_graph(num_nodes, num_edges):
     nodes = list(range(num_nodes))
     graph = random_walk(nodes, num_edges, loops=False, multigraph=False, digraph=False)
-    pprint(graph)
     return graph
 
 
