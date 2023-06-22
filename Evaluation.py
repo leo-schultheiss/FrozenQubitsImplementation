@@ -65,6 +65,7 @@ def print_circ_from_graph(graph):
 
 
 def get_cnot_count(graph: nx.Graph):
+    # multiply by since every edge represent 2 CNOTs
     return len(graph.edges) * 2
 
 
@@ -128,6 +129,7 @@ def print_matrix_as_csv(averages: [[float]]):
     # Loop through each row of the matrix
     for i in range(num_rows):
         # Calculate the index+4 value for the current row
+        # added 4 because we tested it circuits with (number of qubits) >= 4
         index_value = i + 4
 
         # Create a list to store the values in the current row
@@ -153,6 +155,8 @@ def matrix_to_relative(matrix: [[float]]) -> [[float]]:
         first_column_value = row[0]
 
         for value in row:
+            # dividing by the first column without any frozen qubits
+            # to calculate the percentage of the remaining qubits 
             relative_value = value / first_column_value
             relative_row.append(relative_value)
 
@@ -164,7 +168,8 @@ def matrix_to_relative(matrix: [[float]]) -> [[float]]:
 
 if __name__ == "__main__":
     print(generate_random(6, 5).edges)
-    random.seed(12345678910)
+    y = random.seed(12345678910)
+    # number of trials that should be run to evaluate CNOTs count
     n = 5
     results_2_regular = run_average_2_regular(n)
     averages_2_regular = average_results(results_2_regular)
@@ -174,6 +179,7 @@ if __name__ == "__main__":
     print_matrix_as_csv(matrix_to_relative(averages_2_regular))
 
     for additional_edges in range(1):
+        #analyze RGCG with (number of edges) = (n - 1) + additional_edges
         results_random = run_average_random(n, additional_edges)
         averages_random = average_results(results_random)
         print("random with edge + " + str(additional_edges))
