@@ -1,0 +1,2 @@
+# Implementation for the measurement of the effectiveness of FrozenQubits on sparse graphs
+We used the code in Evaluation.py to test the method on sparse graphs such as 2-regular graphs and randomly generated graphs as implemented in Random_sparse_graph_generator.py
