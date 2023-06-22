@@ -145,6 +145,23 @@ def print_matrix_as_csv(averages: [[float]]):
         print(csv_string)
 
 
+def matrix_to_relative(matrix: [[float]]) -> [[float]]:
+    relative_matrix = []
+
+    for row in matrix:
+        relative_row = []
+        first_column_value = row[0]
+
+        for value in row:
+            relative_value = value / first_column_value
+            relative_row.append(relative_value)
+
+        relative_matrix.append(relative_row)
+
+    return relative_matrix
+
+
+
 if __name__ == "__main__":
     print(generate_random(6, 5).edges)
     random.seed(12345678910)
@@ -153,9 +170,13 @@ if __name__ == "__main__":
     averages_2_regular = average_results(results_2_regular)
     print("2-regular csv:")
     print_matrix_as_csv(averages_2_regular)
+    print("relative:")
+    print_matrix_as_csv(matrix_to_relative(averages_2_regular))
 
-    for additional_edges in range(2):
+    for additional_edges in range(1):
         results_random = run_average_random(n, additional_edges)
         averages_random = average_results(results_random)
         print("random with edge + " + str(additional_edges))
         print_matrix_as_csv(averages_random)
+        print("relative values:" + str(additional_edges))
+        print_matrix_as_csv(matrix_to_relative(averages_random))
