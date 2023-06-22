@@ -179,7 +179,7 @@ if __name__ == "__main__":
     print_matrix_as_csv(matrix_to_relative(averages_2_regular))
 
     for additional_edges in range(1):
-        #analyze RGCG with (number of edges) = (n - 1) + additional_edges
+        #analyze RGCG with (number of edges) = (number of nodes - 1) + additional_edges
         results_random = run_average_random(n, additional_edges)
         averages_random = average_results(results_random)
         print("random with edge + " + str(additional_edges))
